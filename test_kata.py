@@ -59,10 +59,31 @@ class Test_the_orders(unittest.TestCase):
         self.assertEqual(myOrder.total_cost, 52)
 
     def test_weighty_parcels(self):
+        # Create an Order
         parcel_list=[]
-        parcel_list.append({"name":"Boots", "dimension":55, "weight":1})
-        parcel_list.append({"name":"Trousers", "dimension":15, "weight":1})
+        parcel_list.append({"name":"Boots", "dimension":55, "weight":8})
+        parcel_list.append({"name":"Trousers", "dimension":15, "weight":5})
         parcel_list.append({"name":"T-shirt", "dimension":1, "weight":1})
+
+        Price_list=[]
+        Price_list.append(19)
+        Price_list.append(12)
+        Price_list.append(3)
+
+        #Initialize Order
+        myOrder=kata.Order()
+
+        #Get the Order
+        result=myOrder.get_my_order(parcel_list, True)
+        
+        #Run the Tests
+        i=0
+        for p in result:
+            self.assertEqual(p.name, parcel_list[i]["name"])
+            self.assertEqual(p.dimension, parcel_list[i]["dimension"])
+            self.assertEqual(p.cost, list(Price_list)[i])
+            i+=1
+        self.assertEqual(myOrder.total_cost, 68)
 
 
 if __name__ == '__main__':

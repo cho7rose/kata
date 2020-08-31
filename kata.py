@@ -7,10 +7,17 @@ class Parcel:
         self.dimension=0
         self.size=""
         self.cost=0
+        self.weight=0
 
-    def create_parcel(self, myName, myDimension):
+    def create_parcel(self, myName, myDimension, myWeight):
         self.name=myName
         self.dimension=myDimension
+        self.get_size()
+        self.cost=self.sizeTocost(self.size)
+        self.weight=myWeight
+        self.addOverweight()
+
+    def get_size(self):
         if(self.dimension<10): 
             self.size="s"
         elif(self.dimension>10 and self.dimension<50): 
@@ -21,8 +28,7 @@ class Parcel:
             self.size="xl"
         else:
             raise ValueError("Dimensions cannot be negative")
-        self.cost=self.sizeTocost(self.size)
-
+    
     def sizeTocost(self, a):
         switch={
             "s":3,
@@ -32,6 +38,16 @@ class Parcel:
         }
         return switch.get(a,0)
 
+    def addOverweight(self):
+        if(self.size=="s" and self.weight>1):
+            self.cost+=(self.weight-1)*2
+        elif(self.size=="m" and self.weight>3):
+            self.cost+=(self.weight-3)*2
+        elif(self.size=="l" and self.weight>6):
+            self.cost+=(self.weight-6)*2
+        elif(self.size=="xl" and self.weight>10):
+            self.cost+=(self.weight-10)*2
+
 class Order:
     def __init__(self):
         self.total_cost=0
@@ -40,7 +56,7 @@ class Order:
     def get_my_order(self, parcels, speedy_shipping):
         for p in parcels:
             myParcel=Parcel()
-            myParcel.create_parcel(p["name"], p["dimension"])
+            myParcel.create_parcel(p["name"], p["dimension"], p["weight"])
             self.List_of_parcels.append(myParcel)
             self.total_cost+=myParcel.cost
         if(speedy_shipping==True):
