@@ -23,15 +23,15 @@ class Parcel:
 
 class Order:
     def __init__(self):
-        #self.order=[]
         self.total_cost=0
         self.List_of_parcels=[]
 
-    def get_my_order(self, parcels):
-        #self.order=parcels
+    def get_my_order(self, parcels, speedy_shipping):
         for p in parcels:
             myParcel=Parcel()
             myParcel.create_parcel(p, parcels[p])
             self.List_of_parcels.append(myParcel)
             self.total_cost+=myParcel.cost
+        if(speedy_shipping==True):
+            self.total_cost=self.total_cost*2
         return(self.List_of_parcels)
