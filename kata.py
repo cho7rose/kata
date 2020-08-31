@@ -40,7 +40,7 @@ class Order:
     def get_my_order(self, parcels, speedy_shipping):
         for p in parcels:
             myParcel=Parcel()
-            myParcel.create_parcel(p, parcels[p])
+            myParcel.create_parcel(p["name"], p["dimension"])
             self.List_of_parcels.append(myParcel)
             self.total_cost+=myParcel.cost
         if(speedy_shipping==True):

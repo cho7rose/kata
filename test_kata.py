@@ -5,11 +5,11 @@ class Test_the_orders(unittest.TestCase):
     def test_simple_order(self):        
         
         # Create an Order
-        Order_list={
-            "Boots":55,
-            "Trousers":15,
-            "T-shirt":1
-        }
+        parcel_list=[]
+        parcel_list.append({"name":"Boots", "dimension":55, "weight":1})
+        parcel_list.append({"name":"Trousers", "dimension":15, "weight":1})
+        parcel_list.append({"name":"T-shirt", "dimension":1, "weight":1})
+
         Price_list=[]
         Price_list.append(15)
         Price_list.append(8)
@@ -19,13 +19,13 @@ class Test_the_orders(unittest.TestCase):
         myOrder=kata.Order()
 
         #Get the Order
-        result=myOrder.get_my_order(Order_list, False)
+        result=myOrder.get_my_order(parcel_list, False)
         
         #Run the Tests
         i=0
         for p in result:
-            self.assertEqual(p.name, list(Order_list.keys())[i])
-            self.assertEqual(p.dimension, list(Order_list.values())[i])
+            self.assertEqual(p.name, parcel_list[i]["name"])
+            self.assertEqual(p.dimension, parcel_list[i]["dimension"])
             self.assertEqual(p.cost, list(Price_list)[i])
             i+=1
         self.assertEqual(myOrder.total_cost, 26)
@@ -33,11 +33,11 @@ class Test_the_orders(unittest.TestCase):
     def test_speedy_shipping(self):
         
         # Create an Order
-        Order_list={
-            "Boots":55,
-            "Trousers":15,
-            "T-shirt":1
-        }
+        parcel_list=[]
+        parcel_list.append({"name":"Boots", "dimension":55, "weight":1})
+        parcel_list.append({"name":"Trousers", "dimension":15, "weight":1})
+        parcel_list.append({"name":"T-shirt", "dimension":1, "weight":1})
+
         Price_list=[]
         Price_list.append(15)
         Price_list.append(8)
@@ -47,19 +47,28 @@ class Test_the_orders(unittest.TestCase):
         myOrder=kata.Order()
 
         #Get the Order
-        result=myOrder.get_my_order(Order_list, True)
+        result=myOrder.get_my_order(parcel_list, True)
         
         #Run the Tests
         i=0
         for p in result:
-            self.assertEqual(p.name, list(Order_list.keys())[i])
-            self.assertEqual(p.dimension, list(Order_list.values())[i])
+            self.assertEqual(p.name, parcel_list[i]["name"])
+            self.assertEqual(p.dimension, parcel_list[i]["dimension"])
             self.assertEqual(p.cost, list(Price_list)[i])
             i+=1
         self.assertEqual(myOrder.total_cost, 52)
+
+    def test_weighty_parcels(self):
+        parcel_list=[]
+        parcel_list.append({"name":"Boots", "dimension":55, "weight":1})
+        parcel_list.append({"name":"Trousers", "dimension":15, "weight":1})
+        parcel_list.append({"name":"T-shirt", "dimension":1, "weight":1})
+
 
 if __name__ == '__main__':
     myTests=Test_the_orders()
     myTests.test_simple_order()
     myTests.test_speedy_shipping()
+    myTests.test_weighty_parcels()
     print("All tests have passed successfully")
+
