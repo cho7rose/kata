@@ -4,13 +4,24 @@ import json
 class Parcel:
     def __init__(self):
         self.name=""
+        self.dimension=0
         self.size=""
         self.cost=0
 
-    def create_parcel(self, myName, mySize):
+    def create_parcel(self, myName, myDimension):
         self.name=myName
-        self.size=mySize
-        self.cost=self.sizeTocost(mySize)
+        self.dimension=myDimension
+        if(self.dimension<10): 
+            self.size="s"
+        elif(self.dimension>10 and self.dimension<50): 
+            self.size="m"
+        elif(self.dimension>50 and self.dimension<100):
+            self.size="l"
+        elif(self.dimension>=100):
+            self.size="xl"
+        else:
+            raise ValueError("Dimensions cannot be negative")
+        self.cost=self.sizeTocost(self.size)
 
     def sizeTocost(self, a):
         switch={

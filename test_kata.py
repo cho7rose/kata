@@ -6,9 +6,9 @@ class Test_the_orders(unittest.TestCase):
         
         # Create an Order
         Order_list={
-            "Boots":"l",
-            "Trousers":"m",
-            "T-shirt":"s"
+            "Boots":55,
+            "Trousers":15,
+            "T-shirt":1
         }
         Price_list=[]
         Price_list.append(15)
@@ -25,7 +25,7 @@ class Test_the_orders(unittest.TestCase):
         i=0
         for p in result:
             self.assertEqual(p.name, list(Order_list.keys())[i])
-            self.assertEqual(p.size, list(Order_list.values())[i])
+            self.assertEqual(p.dimension, list(Order_list.values())[i])
             self.assertEqual(p.cost, list(Price_list)[i])
             i+=1
         self.assertEqual(myOrder.total_cost, 26)
@@ -34,9 +34,9 @@ class Test_the_orders(unittest.TestCase):
         
         # Create an Order
         Order_list={
-            "Boots":"l",
-            "Trousers":"m",
-            "T-shirt":"s"
+            "Boots":55,
+            "Trousers":15,
+            "T-shirt":1
         }
         Price_list=[]
         Price_list.append(15)
@@ -53,7 +53,7 @@ class Test_the_orders(unittest.TestCase):
         i=0
         for p in result:
             self.assertEqual(p.name, list(Order_list.keys())[i])
-            self.assertEqual(p.size, list(Order_list.values())[i])
+            self.assertEqual(p.dimension, list(Order_list.values())[i])
             self.assertEqual(p.cost, list(Price_list)[i])
             i+=1
         self.assertEqual(myOrder.total_cost, 52)
