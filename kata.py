@@ -12,13 +12,15 @@ class Parcel:
     def create_parcel(self, myName, myDimension, myWeight):
         self.name=myName
         self.dimension=myDimension
+        self.weight=myWeight
         self.get_size()
         self.cost=self.sizeTocost(self.size)
-        self.weight=myWeight
         self.addOverweight()
 
     def get_size(self):
-        if(self.dimension<10): 
+        if(self.weight>50):
+            self.size="Heavy"
+        elif(self.dimension<10): 
             self.size="s"
         elif(self.dimension>10 and self.dimension<50): 
             self.size="m"
@@ -34,7 +36,8 @@ class Parcel:
             "s":3,
             "m":8,
             "l":15,
-            "xl":25
+            "xl":25,
+            "Heavy":50
         }
         return switch.get(a,0)
 
@@ -47,6 +50,8 @@ class Parcel:
             self.cost+=(self.weight-6)*2
         elif(self.size=="xl" and self.weight>10):
             self.cost+=(self.weight-10)*2
+        elif(self.size=="Heavy" and self.weight>50):
+            self.cost+=(self.weight-50)
 
 class Order:
     def __init__(self):
